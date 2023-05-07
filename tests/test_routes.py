@@ -16,19 +16,19 @@ def test_get_one_planet(client, two_saved_books):
     assert response.status_code == 200
     assert response_body == {"title": "Frankenstein", "description": "Horror",  "id":1}
 
-def test_get_non_existent_planet(client, two_saved_books):
+def test_get_non_existent_book(client, two_saved_books):
     response = client.get("/books/100")
     response_body = response.get_json()
 
     assert response.status_code == 404
 
-def test_invalid_planet_route(client, two_saved_books):
+def test_invalid_book_route(client, two_saved_books):
     response = client.get("/books/ADA")
     response_body = response.get_json()
 
     assert response.status_code == 400
 
-def test_get_all_planets(client, two_saved_books):
+def test_get_all_books(client, two_saved_books):
     response = client.get("/books")
     response_body = response.get_json()
     print(response_body)
@@ -37,7 +37,7 @@ def test_get_all_planets(client, two_saved_books):
     assert response_body == [{"title": "Frankenstein", "description": "Horror","id": 1}, 
                             {"title": "The Force", "description": "Thriller", "id": 2}]
 
-def test_post_one_planet(client):
+def test_post_one_book(client):
     response =client.post ("/books", json= {"title": "The Shining", 
                                             "description": "Horror"})
     

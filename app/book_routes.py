@@ -35,13 +35,13 @@ def get_all_books():
 
 @books_bp.route("/<id>", methods=["GET"])
 def get_one_book(id):
-    book = validate_model(cls, id)
+    book = validate_model(Book, id)
     return book.make_book_dict(), 200
 
     
 @books_bp.route("/<id>", methods=["PUT"])
 def update_book(id):
-    book = validate_model(cls, id)
+    book = validate_model(Book, id)
     
     request_body = request.get_json()
     
@@ -58,7 +58,7 @@ def update_book(id):
 
 @books_bp.route("/<id>", methods=["DELETE"])
 def delete_book(id):
-    book = validate_model(cls, id)
+    book = validate_model(Book, id)
 
     db.session.delete(book)
     db.session.commit()
